@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Generar el texto con la estructura proporcionada
-        const textoGenerado = `VISTO
+// Generar el texto con la estructura proporcionada
+const textoGenerado = `VISTO:
 ${expediente}.-
-${caratula}.-
-Y CONSIDERANDO
+CARATULA:${caratula}.-
+Y CONSIDERANDO:
 Que, mediante el documento ${nota}.-
 Se solicita la desvinculación del documento ${docDesvincular}.-
 Debido a que ${motivo}.
@@ -49,8 +49,7 @@ ${docVincular}.-
 Que, es oportuno realizar la subsanación en el momento que se detecta un error material
 subsanable, en los términos de la Ley 7253, y la Ley 7267 y su Decreto Reglamentario
 75/21, en el sistema GDE. Que, mediante Resolución RESOL-2020-447-E-GDESDE-MJDH, el Ministerio
-de
-Justicia y Derechos Humanos, organismo de aplicación del GDE conforme artículo 4 del
+de Justicia y Derechos Humanos, organismo de aplicación del GDE conforme artículo 4 del
 Decreto 2020-958-EGDESDEGSDE, reglamenta el presente procedimiento como alternativo para
 subsanar EE "en caso de Detectarse un error material de carga en relación a números de
 documentos, nombres, apellidos, fechas, títulos y palabras o solicitud etc. Siempre y
@@ -59,11 +58,12 @@ por el mismo agente que cometió el error, con la firma conjunta del Jefe de Des
 según correspondiere. Que la mencionada Resolución establece que para aquellas
 subsanaciones "que excedan lo dispuesto en el párrafo precedente o deban salir la órbita
 de la Jurisdicción", deberán ser Subsanados con la firma conjunta del Ministro o Secretario".
- POR ELLO
+                              POR ELLO
 EL SR. PRESIDENTE DE LA ADMINISTRACION PROVINCIAL DE RECURSOS HIDRICOS
- RESUELVE:
+                              RESUELVE:
 ARTICULO 1.- SUBSANAR el error material, desvinculando y corrigiendo el documento:
-${docDesvincular} en el sistema GDE, del expediente ${expediente} y remplazándolo por el documento ${docVincular} en merito a los considerandos de la presente.
+${docDesvincular} en el sistema GDE, del expediente ${expediente} y remplazándolo por el documento 
+${docVincular} en merito a los considerandos de la presente.
 ARTICULO 2.- De forma.-`;
         
         // Mostrar el texto generado
@@ -74,24 +74,26 @@ ARTICULO 2.- De forma.-`;
     }
     
     // Función para copiar el texto al portapapeles
-    function copiarTexto() {
-        // Seleccionar el texto
-        const range = document.createRange();
-        range.selectNode(resultadoDiv);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
+    async function copiarTexto() {
+    const resultadoDiv = document.getElementById('resultado'); // Ajusta este ID
+    
+    try {
+        // Preservar el formato exacto del texto
+        const textoFormateado = resultadoDiv.innerText || resultadoDiv.textContent;
         
-        // Copiar al portapapeles
-        try {
-            const successful = document.execCommand('copy');
-            const msg = successful ? 'Texto copiado al portapapeles' : 'Error al copiar el texto';
-            alert(msg);
-        } catch (err) {
-            alert('Error al copiar el texto: ' + err);
+        await navigator.clipboard.writeText(textoFormateado);
+        alert('Texto copiado al portapapeles correctamente');
+    } catch (err) {
+        // Fallback para navegadores antiguos
+        const elementoTexto = document.createElement('textarea');
+        elementoTexto.value = resultadoDiv.innerText || resultadoDiv.textContent;
+        elementoTexto.style.whiteSpace = 'pre';
+        document.body.appendChild(elementoTexto);
+        elementoTexto.select();
+        document.execCommand('copy');
+        document.body.removeChild(elementoTexto);
+        alert('Texto copiado al portapapeles');
         }
-        
-        // Deseleccionar el texto
-        window.getSelection().removeAllRanges();
     }
     
     // Asignar event listeners a los botones
