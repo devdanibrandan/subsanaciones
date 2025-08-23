@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Texto para Desvinculación de Documentos</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SUB-SANAR ERRORES MATERIALES A.P.R.H</h1>
+        
+        <form id="documentoForm">
+            
+
+            
+            <div class="form-group">
+                <label for="expediente">Número de Expediente:</label>
+                <input type="text" id="expediente" required placeholder="Ej: EX-2025-03727309- -GDESDE-APRH#MAMA">
+                
+            </div>
+
+            <form id="documentoForm">
+            <div class="form-group">
+                <label for="area">Área/Departamento que solicita:</label>
+                <select id="area" required>
+                    <option value="">Seleccione un área/departamento</option>
+                    <option value="Secretaría General">Secretaría General</option>
+                    <option value="Jefatura Administrativa Contable">Jefatura Administrativa Contable</option>
+                    <option value="Servicios Reducidos">Servicios Reducidos</option>
+                    <option value="Conservación y Mantenimiento">Conservación y Mantenimiento</option>
+                    <option value="Construcciones">Construcciones</option>
+                    <option value="Estudios y Proyectos">Estudios y Proyectos</option>
+                    <option value="Asesoría Legal">Asesoría Legal</option>
+                    <option value="otro">Otro (especificar)</option>
+                </select>
+                <input type="text" id="otraArea" placeholder="Especifique el área/departamento" style="display: none; margin-top: 10px;">
+            </div>
+            
+            <div class="form-group">
+                <label for="caratula">Nombre de Carátula:</label>
+                <input type="text" id="caratula" required placeholder="Ej: CERTIFICADO N° 4..">
+            </div>
+            
+            <div class="form-group">
+                <label for="nota">Número de Nota:</label>
+                <input type="text" id="nota" required placeholder="Ej: COPDI-2025-03846462-GDESDE-APRH#MAMA">
+                
+            </div>
+            
+            <div class="form-group">
+                <label for="docDesvincular">Documento a Desvincular:</label>
+                <input type="text" id="docDesvincular" required placeholder="Ej: CE-2025-03777847-GDESDE-APRH#MAMA">
+                
+            </div>
+            
+            <div class="form-group">
+                <label for="docVincular">Documento Corregido a Vincular:</label>
+                <input type="text" id="docVincular" required placeholder="Ej: CE-2025-03836664-GDESDE-APRH#MAMA">
+                
+            </div>
+            
+            <div class="form-group">
+                <label for="motivo">Motivo de Desvinculación:</label>
+                <textarea id="motivo" required placeholder="Ej: SE ELEVÓ DE MANERA INCORRECTA LA DOCUMENTACIÓN"></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" id="generarBtn">Generar Texto</button>
+                <button type="button" id="resetBtn">Reiniciar Formulario</button>
+            </div>
+        </form>
+        
+        <div class="resultado" id="resultado">
+            <!-- Aquí se mostrará el texto generado -->
+        </div>
+        
+        <button type="button" id="copiarBtn" class="copiar-btn">Copiar Texto</button>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
